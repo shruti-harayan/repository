@@ -1,14 +1,36 @@
 version: 2.1
+
 jobs:
   build:
     docker:
       - image: circleci/python:3.8
     steps:
       - checkout
-      - run: echo "Hello, shruti!"
+      - run:
+          name: Print Message
+          command: echo "Hello, Shruti!"
+      - run:
+          name: Install Dependencies
+          command: pip install -r requirements.txt  # If you have dependencies
+      - run:
+          name: Run Python Script
+          command: python app.py  # Replace with your script name
+
+  test:
+    docker:
+      - image: circleci/python:3.8
     steps:
       - checkout
       - run:
-         name: Run Python Script
-         command: python app.py  # Replace with your script name
+          name: Install pytest
+          command: pip install pytest
+      - run:
+          name: Run Tests
+          command: pytest  # Run all tests in the project
 
+workflows:
+  version: 2
+  my_pipeline:
+    jobs:
+      - build
+      - test
