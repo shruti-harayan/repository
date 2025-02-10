@@ -6,3 +6,9 @@ jobs:
     steps:
       - checkout
       - run: echo "Hello, shruti!"
+    steps:
+      - checkout
+      - run:
+         name: Run Python Script
+         command: python app.py  # Replace with your script name
+
